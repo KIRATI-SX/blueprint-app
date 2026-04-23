@@ -12,9 +12,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F9F8F6;
+  background-color: var(--color-brown-100);
   color: #26231e;
-  --background: oklch(1 0 0);
+  --background: var(--color-brown-100);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);

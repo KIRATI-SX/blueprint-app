@@ -13,6 +13,7 @@ export { default as ExpandUpLightIcon } from "./ExpandUpLightIcon";
 export { default as FileLightIcon } from "./FileLightIcon";
 export { default as HappyLightIcon } from "./HappyLightIcon";
 export { default as ImgBoxLightIcon } from "./ImgBoxLightIcon";
+export { default as MenuHamburgerLightIcon } from "./MenuHamburgerLightIcon";
 export { default as NotebookLightIcon } from "./NotebookLightIcon";
 export { default as OutLightIcon } from "./OutLightIcon";
 export { default as RefreshLightIcon } from "./RefreshLightIcon";

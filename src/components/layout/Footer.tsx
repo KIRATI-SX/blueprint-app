@@ -1,4 +1,8 @@
-import { GithubIcon, GoogleIcon, LinkedinIcon } from "../../assets/icons/social";
+import {
+  GithubIcon,
+  GoogleIcon,
+  LinkedinIcon,
+} from "../../assets/icons/social";
 
 const ICON_BROWN_500 = "var(--color-brown-500)";
 
@@ -18,13 +22,13 @@ const socialLinks = [
     label: "Google",
     icon: GoogleIcon,
   },
-];
+] as const;
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-brown-200">
-      <section className="mx-auto flex h-[144px] w-full items-center justify-between px-[120px] py-[60px]">
-        <section className="flex items-center gap-6">
+    <footer className="w-full max-md:bg-[#F2F0EB] md:bg-brown-200">
+      <div className="mx-auto flex w-full max-w-full flex-col items-center justify-center gap-5 px-4 py-10 md:flex-row md:items-center md:justify-between md:gap-0 md:px-8 md:py-[60px] lg:px-[120px]">
+        <div className="flex flex-row items-center justify-center gap-6 md:items-center md:gap-6">
           <p className="body-1 text-brown-500">Get in touch</p>
 
           <nav aria-label="Social media links">
@@ -36,7 +40,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={label}
-                    className="inline-flex h-5 w-5 items-center justify-center text-brown-600 transition-opacity hover:opacity-70"
+                    className="inline-flex h-5 w-5 items-center justify-center text-brown-600 transition-opacity hover:opacity-70 max-md:h-8 max-md:w-8 max-md:rounded-full "
                   >
                     <Icon size={24} color={ICON_BROWN_500} />
                   </a>
@@ -44,17 +48,17 @@ export default function Footer() {
               ))}
             </ul>
           </nav>
-        </section>
+        </div>
 
-        <nav aria-label="Footer navigation">
+        <nav aria-label="Footer navigation" className="shrink-0">
           <a
             href="/"
-            className="body-1 text-brown-600 underline underline-offset-[0%] decoration-[0%]"
+            className="body-1 text-brown-600 underline decoration-[0%] underline-offset-[0%] md:text-left"
           >
             Home page
           </a>
         </nav>
-      </section>
+      </div>
     </footer>
   );
 }
