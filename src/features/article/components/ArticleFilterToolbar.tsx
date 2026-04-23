@@ -10,8 +10,8 @@ import {
 } from "@/components/ui/select"
 import { cn } from "@/lib/utils"
 
-import { ARTICLE_FILTERS, ARTICLE_CATEGORY_SELECT_ID } from "./constants"
-import type { ArticleFilter } from "./types"
+import { ARTICLE_FILTERS, ARTICLE_CATEGORY_SELECT_ID } from "../constants"
+import type { ArticleFilter } from "../types"
 
 type ArticleFilterToolbarProps = Readonly<{
   activeFilter: ArticleFilter

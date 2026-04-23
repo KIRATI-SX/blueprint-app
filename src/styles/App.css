@@ -101,7 +101,7 @@
   background-color: #eb5164;
 }
 
-/* Brown/white tokens live in src/index.css (:root + @theme) for Tailwind utilities */
+/* Brown/white tokens live in src/styles/index.css (:root + @theme) for Tailwind utilities */
 :root {
   --color-orange: #f2b68c;
   --color-green: #12b279;

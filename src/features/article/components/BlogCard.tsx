@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import type { BlogPost } from "./blogPost"
+import type { BlogPost } from "@/types/blogPost"
 
 function authorAvatarSrc(post: Pick<BlogPost, "author" | "authorImage">): string {
   if (post.authorImage) {

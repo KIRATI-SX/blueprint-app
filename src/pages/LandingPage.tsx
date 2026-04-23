@@ -2,7 +2,7 @@ import NavBar from "../components/layout/NavBar";
 
 import Footer from "../components/layout/Footer";
 import HeroSection from "@/components/section/HeroSection";
-import ArticleSection from "@/components/section/ArticleSection";
+import ArticleSection from "@/features/article/ArticleSection";
 
 export default function LandingPage() {
   return (

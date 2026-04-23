@@ -1,19 +1,29 @@
-import { BlogCard } from "./BlogCard"
+import { useMemo } from "react"
+
+import { useBlogPosts } from "@/hooks/useBlogPosts"
+import { filterPostsByArticleFilter } from "../model/filterPostsByArticleFilter"
+import type { ArticleFilter } from "../types"
 import { ArticleFilterToolbar } from "./ArticleFilterToolbar"
-import type { BlogPost } from "./blogPost"
-import type { ArticleFilter } from "./types"
+import { ArticlePostListBlock } from "./ArticlePostListBlock"
 
 type ArticleSectionViewProps = Readonly<{
   activeFilter: ArticleFilter
   onFilterChange: (filter: ArticleFilter) => void
-  posts: readonly BlogPost[]
 }>
 
+/**
+ * จัด layout + ประกอบ hook / filter; ไม่รวม HTTP หรือ map กับ API
+ */
 export function ArticleSectionView({
   activeFilter,
   onFilterChange,
-  posts,
 }: ArticleSectionViewProps) {
+  const { posts, loadState, errorMessage } = useBlogPosts()
+  const filteredPosts = useMemo(
+    () => filterPostsByArticleFilter(posts, activeFilter),
+    [posts, activeFilter],
+  )
+
   return (
     <section
       aria-label="Article section"
@@ -27,13 +37,11 @@ export function ArticleSectionView({
         />
       </div>
 
-      <ul className="m-0 grid list-none grid-cols-1 gap-6 p-0 lg:grid-cols-2">
-        {posts.map((post) => (
-          <li key={post.id} className="min-w-0">
-            <BlogCard post={post} />
-          </li>
-        ))}
-      </ul>
+      <ArticlePostListBlock
+        loadState={loadState}
+        errorMessage={errorMessage}
+        posts={filteredPosts}
+      />
     </section>
   )
 }
