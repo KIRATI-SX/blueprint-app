@@ -1,0 +1,27 @@
+export { default as AddRoundLightIcon } from "./AddRoundLightIcon";
+export { default as BellLightIcon } from "./BellLightIcon";
+export { default as ChatLightIcon } from "./ChatLightIcon";
+export { default as CloseRoundLightIcon } from "./CloseRoundLightIcon";
+export { default as CopyLightIcon } from "./CopyLightIcon";
+export { default as DateTodayLightIcon } from "./DateTodayLightIcon";
+export { default as DoneRoundLightIcon } from "./DoneRoundLightIcon";
+export { default as EditLightIcon } from "./EditLightIcon";
+export { default as ExpandDownLightIcon } from "./ExpandDownLightIcon";
+export { default as ExpandLeftLightIcon } from "./ExpandLeftLightIcon";
+export { default as ExpandRightLightIcon } from "./ExpandRightLightIcon";
+export { default as ExpandUpLightIcon } from "./ExpandUpLightIcon";
+export { default as FileLightIcon } from "./FileLightIcon";
+export { default as HappyLightIcon } from "./HappyLightIcon";
+export { default as ImgBoxLightIcon } from "./ImgBoxLightIcon";
+export { default as NotebookLightIcon } from "./NotebookLightIcon";
+export { default as OutLightIcon } from "./OutLightIcon";
+export { default as RefreshLightIcon } from "./RefreshLightIcon";
+export { default as SadLightIcon } from "./SadLightIcon";
+export { default as SearchLightIcon } from "./SearchLightIcon";
+export { default as SignOutSqureLightIcon } from "./SignOutSqureLightIcon";
+export { default as StarLightIcon } from "./StarLightIcon";
+export { default as TimeLightIcon } from "./TimeLightIcon";
+export { default as TrashLightIcon } from "./TrashLightIcon";
+export { default as UserDuotoneIcon } from "./UserDuotoneIcon";
+
+export type { IconProps } from "./types";
