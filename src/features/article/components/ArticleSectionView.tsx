@@ -1,32 +1,36 @@
-import { useMemo } from "react"
+import type { BlogPost } from "@/types/blogPost"
 
-import { useBlogPosts } from "@/hooks/useBlogPosts"
-import { filterPostsByArticleFilter } from "../model/filterPostsByArticleFilter"
-import type { ArticleFilter } from "../types"
+import type { ArticleFilter, BlogPostsLoadState } from "../types"
 import { ArticleFilterToolbar } from "./ArticleFilterToolbar"
 import { ArticlePostListBlock } from "./ArticlePostListBlock"
 
 type ArticleSectionViewProps = Readonly<{
   activeFilter: ArticleFilter
   onFilterChange: (filter: ArticleFilter) => void
+  searchQuery: string
+  onSearchQueryChange: (value: string) => void
+  debouncedSearchQuery: string
+  posts: readonly BlogPost[]
+  loadState: BlogPostsLoadState
+  errorMessage: string | null
 }>
 
 /**
- * จัด layout + ประกอบ hook / filter; ไม่รวม HTTP หรือ map กับ API
+ * จัด layout + filter; ข้อมูลรายการมาจาก parent (server-side filter + pagination)
+ * ใช้ div wrapper — landmark <section> อยู่ที่ `ArticleSection`
  */
 export function ArticleSectionView({
   activeFilter,
   onFilterChange,
+  searchQuery,
+  onSearchQueryChange,
+  debouncedSearchQuery,
+  posts,
+  loadState,
+  errorMessage,
 }: ArticleSectionViewProps) {
-  const { posts, loadState, errorMessage } = useBlogPosts()
-  const filteredPosts = useMemo(
-    () => filterPostsByArticleFilter(posts, activeFilter),
-    [posts, activeFilter],
-  )
-
   return (
-    <section
-      aria-label="Article section"
+    <div
       className="flex w-full flex-col gap-12 md:px-8 lg:px-16 xl:px-[120px]"
     >
       <div className="flex flex-col items-start justify-center gap-6 md:gap-8">
@@ -34,14 +38,19 @@ export function ArticleSectionView({
         <ArticleFilterToolbar
           activeFilter={activeFilter}
           onFilterChange={onFilterChange}
+          searchQuery={searchQuery}
+          onSearchQueryChange={onSearchQueryChange}
+          debouncedSearchQuery={debouncedSearchQuery}
+          searchResults={posts}
+          searchLoadState={loadState}
         />
       </div>
 
       <ArticlePostListBlock
         loadState={loadState}
         errorMessage={errorMessage}
-        posts={filteredPosts}
+        posts={posts}
       />
-    </section>
+    </div>
   )
 }

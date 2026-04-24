@@ -1,12 +1,14 @@
 import { useEffect, useId, useState } from "react"
 import logo from "../../assets/icons/logo.svg"
+import { useAuth } from "@/contexts/AuthContext"
 import { MenuHamburgerLightIcon } from "@/assets/icons/icon-base"
 import Button from "../common/Button"
 
 const MOBILE_AUTH_PANEL_ID = "nav-mobile-auth-panel"
 
 export default function NavBar() {
-  const isLoggedIn = false
+  const { isAuthenticated, logout } = useAuth()
+  const isLoggedIn = isAuthenticated
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const headingId = useId()
 
@@ -37,7 +39,14 @@ export default function NavBar() {
 
         <section className="hidden items-center gap-3 md:flex">
           {isLoggedIn ? (
-            <></>
+            <Button
+              type="button"
+              variant="outline"
+              className="w-auto px-8"
+              onClick={logout}
+            >
+              Log out
+            </Button>
           ) : (
             <>
               <Button variant="outline" className="w-auto px-8">
@@ -50,7 +59,18 @@ export default function NavBar() {
           )}
         </section>
 
-        {!isLoggedIn && (
+        {isLoggedIn ? (
+          <div className="flex items-center md:hidden">
+            <Button
+              type="button"
+              variant="outline"
+              className="h-9! w-auto! min-w-0 px-4 text-sm"
+              onClick={logout}
+            >
+              Log out
+            </Button>
+          </div>
+        ) : (
           <div className="flex items-center md:hidden">
             <button
               type="button"

@@ -5,7 +5,7 @@ export { ArticlePostListBlock } from "./components/ArticlePostListBlock"
 export { BlogCard } from "./components/BlogCard"
 
 export { useArticleFilter } from "./hooks/useArticleFilter"
-export { useBlogPosts } from "@/hooks/useBlogPosts"
+export { useArticlePosts } from "./hooks/useArticlePosts"
 
 export { fetchBlogPosts } from "@/services/blogPosts/blogPostsService"
 export type { ApiPostRaw, PostsListResponse } from "@/services/blogPosts/postsApiTypes"

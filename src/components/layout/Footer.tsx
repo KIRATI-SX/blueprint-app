@@ -40,7 +40,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={label}
-                    className="inline-flex h-5 w-5 items-center justify-center text-brown-600 transition-opacity hover:opacity-70 max-md:h-8 max-md:w-8 max-md:rounded-full "
+                    className="inline-flex h-fit w-fit items-center justify-center text-brown-600 transition-opacity hover:opacity-70 max-md:h-8 max-md:w-8 max-md:rounded-full "
                   >
                     <Icon size={24} color={ICON_BROWN_500} />
                   </a>

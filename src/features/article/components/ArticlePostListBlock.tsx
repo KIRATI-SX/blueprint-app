@@ -1,13 +1,13 @@
-import type { BlogPost } from "@/types/blogPost"
-
-import type { BlogPostsLoadState } from "../types"
-import { BlogCard } from "./BlogCard"
+import type { BlogPost } from "@/types/blogPost";
+import { Spinner } from "@/components/ui/spinner"
+import type { BlogPostsLoadState } from "../types";
+import { BlogCard } from "./BlogCard";
 
 type ArticlePostListBlockProps = Readonly<{
-  loadState: BlogPostsLoadState
-  errorMessage: string | null
-  posts: readonly BlogPost[]
-}>
+  loadState: BlogPostsLoadState;
+  errorMessage: string | null;
+  posts: readonly BlogPost[];
+}>;
 
 /**
  * แยก “ผลลัพธ์การโหลด/รายการการ์ด” ออกจาก section shell (presentation)
@@ -20,19 +20,27 @@ export function ArticlePostListBlock({
   return (
     <>
       {loadState === "loading" && (
-        <p className="body-2 text-brown-400" role="status" aria-live="polite">
-          Loading articles…
-        </p>
+        <div className="flex flex-col items-center justify-center gap-2 h-50">
+           <Spinner className="size-10" />
+          <p className="body-2 text-brown-400" role="status" aria-live="polite">
+            Loading articles…
+          </p>
+        </div>
       )}
 
       {loadState === "error" && errorMessage && (
+         <div className="flex flex-col items-center justify-center gap-2 h-50">
+
         <p className="body-2 text-red-700" role="alert">
           {errorMessage}
         </p>
+         </div>
       )}
 
       {loadState === "success" && posts.length === 0 && (
-        <p className="body-2 text-brown-400">No articles match this filter.</p>
+        <div className="flex flex-col items-center justify-center gap-2 h-50">
+          <p className="body-2 text-brown-400">No articles match this filter.</p>
+        </div>
       )}
 
       {loadState === "success" && posts.length > 0 && (
@@ -45,5 +53,5 @@ export function ArticlePostListBlock({
         </ul>
       )}
     </>
-  )
+  );
 }

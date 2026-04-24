@@ -1,16 +1,12 @@
-import NavBar from "../components/layout/NavBar";
-
-import Footer from "../components/layout/Footer";
+import BlogPageLayout from "@/components/layout/BlogPageLayout";
 import HeroSection from "@/components/section/HeroSection";
 import ArticleSection from "@/features/article/ArticleSection";
 
 export default function LandingPage() {
   return (
-    <main className="flex flex-col justify-between h-screen" >
-        <NavBar />
-        <HeroSection />
-        <ArticleSection />
-        <Footer />
-    </main>
+    <BlogPageLayout mainClassName="flex flex-1 flex-col">
+      <HeroSection />
+      <ArticleSection />
+    </BlogPageLayout>
   );
 }
