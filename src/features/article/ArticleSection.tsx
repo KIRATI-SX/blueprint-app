@@ -15,6 +15,7 @@ export default function ArticleSection() {
   const debouncedSearchQuery = useDebouncedValue(searchQuery, SEARCH_DEBOUNCE_MS)
   const {
     posts,
+    lastSuccessfulNonEmptyPosts,
     loadState,
     errorMessage,
     loadMore,
@@ -35,6 +36,7 @@ export default function ArticleSection() {
         onSearchQueryChange={setSearchQuery}
         debouncedSearchQuery={debouncedSearchQuery}
         posts={posts}
+        lastSuccessfulNonEmptyPosts={lastSuccessfulNonEmptyPosts}
         loadState={loadState}
         errorMessage={errorMessage}
       />

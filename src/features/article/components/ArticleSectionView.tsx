@@ -11,6 +11,7 @@ type ArticleSectionViewProps = Readonly<{
   onSearchQueryChange: (value: string) => void
   debouncedSearchQuery: string
   posts: readonly BlogPost[]
+  lastSuccessfulNonEmptyPosts: readonly BlogPost[]
   loadState: BlogPostsLoadState
   errorMessage: string | null
 }>
@@ -26,6 +27,7 @@ export function ArticleSectionView({
   onSearchQueryChange,
   debouncedSearchQuery,
   posts,
+  lastSuccessfulNonEmptyPosts,
   loadState,
   errorMessage,
 }: ArticleSectionViewProps) {
@@ -50,6 +52,9 @@ export function ArticleSectionView({
         loadState={loadState}
         errorMessage={errorMessage}
         posts={posts}
+        activeFilter={activeFilter}
+        debouncedSearchQuery={debouncedSearchQuery}
+        lastSuccessfulNonEmptyPosts={lastSuccessfulNonEmptyPosts}
       />
     </div>
   )

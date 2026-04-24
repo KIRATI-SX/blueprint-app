@@ -24,6 +24,9 @@ export function useArticlePosts(
   debouncedSearchQuery: string = "",
 ) {
   const [posts, setPosts] = useState<BlogPost[]>([])
+  const [lastSuccessfulNonEmptyPosts, setLastSuccessfulNonEmptyPosts] = useState<
+    BlogPost[]
+  >([])
   const [loadState, setLoadState] = useState<BlogPostsLoadState>("idle")
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [loadMoreError, setLoadMoreError] = useState<string | null>(null)
@@ -55,7 +58,6 @@ export function useArticlePosts(
     setErrorMessage(null)
     setLoadMoreError(null)
     setNextPage(null)
-    setPosts([])
 
     let cancelled = false
 
@@ -67,6 +69,9 @@ export function useArticlePosts(
         }
         setPosts(data.posts)
         setNextPage(data.nextPage)
+        if (data.posts.length > 0) {
+          setLastSuccessfulNonEmptyPosts(data.posts)
+        }
         setLoadState("success")
       } catch (err) {
         if (cancelled) {
@@ -124,6 +129,7 @@ export function useArticlePosts(
 
   return {
     posts,
+    lastSuccessfulNonEmptyPosts,
     loadState,
     errorMessage,
     loadMore,
