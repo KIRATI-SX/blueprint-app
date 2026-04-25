@@ -1,33 +1,57 @@
 import "@/styles/App.css"
+import { lazy, Suspense } from "react"
+import {
+  loadLandingPage,
+  loadLoginPage,
+  loadNotFoundPage,
+  loadProfilePage,
+  loadRegistrationSuccessPage,
+  loadResetPasswordPage,
+  loadSignUpPage,
+  loadViewPostPage,
+} from "@/app/route-preload"
 import { AuthProvider } from "@/contexts/AuthContext"
-import LandingPage from "./pages/LandingPage";
-import LoginPage from "./pages/LoginPage";
-import ProfilePage from "./pages/ProfilePage";
-import ResetPasswordPage from "./pages/ResetPasswordPage";
-import SignUpPage from "./pages/SignUpPage";
-import RegistrationSuccessPage from "./pages/RegistrationSuccessPage";
-import ViewPostPage from "./pages/ViewPostPage";
+import { Toaster } from "@/components/ui/sonner"
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import NotFoundPage from "./pages/NotFoundPage";
+const LandingPage = lazy(loadLandingPage)
+const LoginPage = lazy(loadLoginPage)
+const ProfilePage = lazy(loadProfilePage)
+const ResetPasswordPage = lazy(loadResetPasswordPage)
+const SignUpPage = lazy(loadSignUpPage)
+const RegistrationSuccessPage = lazy(loadRegistrationSuccessPage)
+const ViewPostPage = lazy(loadViewPostPage)
+const NotFoundPage = lazy(loadNotFoundPage)
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/registration-success" element={<RegistrationSuccessPage />} />
-          <Route path="/post/:postId" element={<ViewPostPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/reset-password" element={<ResetPasswordPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        <Suspense
+          fallback={(
+            <section
+              aria-live="polite"
+              className="flex min-h-screen items-center justify-center text-brown-500"
+            >
+              Loading page...
+            </section>
+          )}
+        >
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/registration-success" element={<RegistrationSuccessPage />} />
+            <Route path="/post/:postId" element={<ViewPostPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
+        <Toaster />
       </BrowserRouter>
     </AuthProvider>
-  );
+  )
 }
 
-export default App;
+export default App

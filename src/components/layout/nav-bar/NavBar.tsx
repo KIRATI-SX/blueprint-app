@@ -1,6 +1,7 @@
 import { useId } from "react"
 import { Link } from "react-router-dom"
 import logo from "../../../assets/icons/logo.svg"
+import { preloadRoute } from "@/app/route-preload"
 import { useAuth } from "@/contexts/AuthContext"
 import { MOBILE_AUTH_PANEL_ID } from "./constants"
 import { NavBarGuestAuthLinks } from "./NavBarGuestAuthLinks"
@@ -23,7 +24,14 @@ export default function NavBar() {
         className="flex w-full min-h-0 max-w-full items-center justify-between max-md:min-h-12 max-md:border-b max-md:border-brown-300 max-md:px-6 max-md:py-3"
         aria-label="Main navigation"
       >
-        <Link to="/" aria-label="Homepage" className="flex items-center">
+        <Link
+          to="/"
+          aria-label="Homepage"
+          className="flex items-center"
+          onMouseEnter={() => preloadRoute("/")}
+          onFocus={() => preloadRoute("/")}
+          onTouchStart={() => preloadRoute("/")}
+        >
           <img
             src={logo}
             alt="hh. logo, two h letters and a green dot"
