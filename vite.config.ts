@@ -16,4 +16,24 @@ export default defineConfig({
     react(),
     babel({ presets: [reactCompilerPreset()] })
   ],
+  build: {
+    rolldownOptions: {
+      output: {
+        codeSplitting: true,
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return
+
+          if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+            return 'vendor-react'
+          }
+
+          if (id.includes('radix') || id.includes('sonner') || id.includes('lucide-react')) {
+            return 'vendor-ui'
+          }
+
+          return 'vendor-misc'
+        },
+      },
+    },
+  },
 })
