@@ -186,6 +186,7 @@ export function SignUpForm({
           Already have an account?{" "}
           <Link
             to="/login"
+            state={loginLinkState}
             className="font-medium text-brown-600 underline underline-offset-2 transition-colors hover:text-brown-500"
           >
             Log in
