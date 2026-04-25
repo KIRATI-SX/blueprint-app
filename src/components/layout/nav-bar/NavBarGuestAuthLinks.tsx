@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom"
+import { preloadRoute } from "@/app/route-preload"
 import { NAV_LOGIN_LINK_CLASS, NAV_SIGNUP_LINK_CLASS } from "./constants"
 
 type NavBarGuestAuthLinksProps = Readonly<{
@@ -16,6 +17,9 @@ export function NavBarGuestAuthLinks({ onNavigate }: NavBarGuestAuthLinksProps) 
         state={{ from }}
         className={NAV_LOGIN_LINK_CLASS}
         onClick={onNavigate}
+        onMouseEnter={() => preloadRoute("/login")}
+        onFocus={() => preloadRoute("/login")}
+        onTouchStart={() => preloadRoute("/login")}
       >
         Log in
       </Link>
@@ -24,6 +28,9 @@ export function NavBarGuestAuthLinks({ onNavigate }: NavBarGuestAuthLinksProps) 
         state={{ from }}
         className={NAV_SIGNUP_LINK_CLASS}
         onClick={onNavigate}
+        onMouseEnter={() => preloadRoute("/signup")}
+        onFocus={() => preloadRoute("/signup")}
+        onTouchStart={() => preloadRoute("/signup")}
       >
         Sign up
       </Link>

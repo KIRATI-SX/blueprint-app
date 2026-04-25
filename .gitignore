@@ -29,3 +29,4 @@ dist-ssr
 # Documents
 .documents
 .cursor
+docs/*
