@@ -9,9 +9,12 @@ import {
 import { AuthContext } from "./AuthContextInstance"
 import { LoginRequiredDialog } from "./LoginRequiredDialog"
 import {
+  clearAdminAuthenticatedInStorage,
   clearAuthenticatedInStorage,
   getInitialUserFromSession,
+  persistAdminAuthenticatedInStorage,
   persistAuthenticatedInStorage,
+  readIsAdminAuthenticatedFromStorage,
   readIsAuthenticatedFromStorage,
 } from "./authStorage"
 
@@ -22,6 +25,9 @@ type AuthProviderProps = Readonly<{
 export function AuthProvider({ children }: AuthProviderProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(
     readIsAuthenticatedFromStorage,
+  )
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(
+    readIsAdminAuthenticatedFromStorage,
   )
   const [user, setUser] = useState<AuthUser | null>(getInitialUserFromSession)
   const [loginDialogOpen, setLoginDialogOpen] = useState(false)
@@ -35,8 +41,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const logout = useCallback(() => {
     setIsAuthenticated(false)
+    setIsAdminAuthenticated(false)
     setUser(null)
     clearAuthenticatedInStorage()
+    clearAdminAuthenticatedInStorage()
+  }, [])
+
+  const loginAdmin = useCallback(() => {
+    login()
+    setIsAdminAuthenticated(true)
+    persistAdminAuthenticatedInStorage()
+  }, [login])
+
+  const logoutAdmin = useCallback(() => {
+    setIsAdminAuthenticated(false)
+    clearAdminAuthenticatedInStorage()
   }, [])
 
   const requireAuth = useCallback((): boolean => {
@@ -47,6 +66,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
     return false
   }, [isAuthenticated])
 
+  const requireAdminAuth = useCallback((): boolean => {
+    if (isAdminAuthenticated) {
+      return true
+    }
+    setLoginDialogOpen(true)
+    return false
+  }, [isAdminAuthenticated])
+
   const onCreateAccount = useCallback(() => {
     login()
   }, [login])
@@ -56,8 +83,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, [login])
 
   const value = useMemo(
-    () => ({ isAuthenticated, user, login, logout, requireAuth }),
-    [isAuthenticated, user, login, logout, requireAuth],
+    () => ({
+      isAuthenticated,
+      isAdminAuthenticated,
+      user,
+      login,
+      loginAdmin,
+      logout,
+      logoutAdmin,
+      requireAuth,
+      requireAdminAuth,
+    }),
+    [
+      isAuthenticated,
+      isAdminAuthenticated,
+      user,
+      login,
+      loginAdmin,
+      logout,
+      logoutAdmin,
+      requireAuth,
+      requireAdminAuth,
+    ],
   )
 
   return (

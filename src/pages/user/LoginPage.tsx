@@ -20,15 +20,17 @@ export default function LoginPage() {
   const location = useLocation()
   const { isAuthenticated, login } = useAuth()
   const navigate = useNavigate()
+  const returnTo =
+    (location.state as { returnTo?: string } | null)?.returnTo ?? "/"
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/", { replace: true })
+      navigate(returnTo, { replace: true })
     }
-  }, [isAuthenticated, navigate])
+  }, [isAuthenticated, navigate, returnTo])
 
   return (
     <BlogPageLayout
@@ -48,7 +50,7 @@ export default function LoginPage() {
             onSubmit={(event) => {
               event.preventDefault()
               login()
-              navigate("/")
+              navigate(returnTo, { replace: true })
             }}
           >
             <div className="flex flex-col gap-2">
