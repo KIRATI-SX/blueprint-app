@@ -1,9 +1,9 @@
 import BlogPageLayout from "@/components/layout/BlogPageLayout";
-import { ViewPostDetail } from "@/features/article/components/ViewPostDetail";
 import {
+  ViewPostDetail,
   ViewPostError,
   ViewPostLoading,
-} from "@/features/article/components/ViewPostFeedback";
+} from "@/features/article/components/view-post";
 import { useViewPost } from "@/features/article/hooks/useViewPost";
 import { useParams } from "react-router-dom";
 

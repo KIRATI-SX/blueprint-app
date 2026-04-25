@@ -1,18 +1,18 @@
 import type { ReactNode } from "react";
 import Footer from "./Footer";
-import NavBar from "./NavBar";
+import { NavBar } from "./nav-bar";
 
-type BlogPageLayoutProps = Readonly<{
+interface BlogPageLayoutProps {
   children: ReactNode;
   mainClassName?: string;
   mainAriaLabel?: string;
-}>;
+}
 
 export default function BlogPageLayout({
   children,
   mainClassName,
   mainAriaLabel,
-}: BlogPageLayoutProps) {
+}: Readonly<BlogPageLayoutProps>) {
   return (
     <div className="flex min-h-screen flex-col bg-white">
       <NavBar />
