@@ -19,6 +19,7 @@ import {
 import AdminPanelLayout from "@/components/layout/admin/AdminPanelLayout"
 import { AuthProvider } from "@/contexts/AuthContext"
 import RequireAdminAuth from "@/features/auth/guards/RequireAdminAuth"
+import RequireUserAuth from "@/features/auth/guards/RequireUserAuth"
 import { Toaster } from "@/components/ui/sonner"
 
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
@@ -82,8 +83,10 @@ function App() {
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/registration-success" element={<RegistrationSuccessPage />} />
             <Route path="/post/:postId" element={<ViewPostPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/reset-password" element={<ResetPasswordPage />} />
+            <Route element={<RequireUserAuth />}>
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/reset-password" element={<ResetPasswordPage />} />
+            </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
