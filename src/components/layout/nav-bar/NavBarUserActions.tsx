@@ -13,9 +13,9 @@ type NavBarUserActionsProps = Readonly<{
 }>
 
 const WRAPPER_CLASS: Record<NavBarUserActionsProps["variant"], string> = {
-  desktop: "flex items-center gap-2",
+  desktop: "flex items-center gap-2 ",
   mobile:
-    "flex min-w-0 max-w-sm shrink items-center justify-end gap-1.5 md:hidden",
+    "flex min-w-0 max-w-sm shrink items-center justify-end gap-2 md:hidden",
 }
 
 const NOTIFICATION_PROPS: Record<
@@ -23,11 +23,11 @@ const NOTIFICATION_PROPS: Record<
   { iconSize: number; boxClassName: string }
 > = {
   desktop: {
-    iconSize: 20,
+    iconSize: 24,
     boxClassName: NOTIFICATION_BUTTON_CLASS_DESKTOP,
   },
   mobile: {
-    iconSize: 18,
+    iconSize: 24,
     boxClassName: NOTIFICATION_BUTTON_CLASS_MOBILE,
   },
 }
