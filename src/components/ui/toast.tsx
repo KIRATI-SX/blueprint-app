@@ -35,6 +35,10 @@ type ShowToastFn = {
   success: (options: Omit<ShowToastOptions, "type">) => string | number
 }
 
+function createToastId(): string {
+  return globalThis.crypto?.randomUUID?.() ?? `toast-${Date.now()}-${Math.random()}`
+}
+
 export const showToast: ShowToastFn = ({
   type = "success",
   title,
@@ -51,8 +55,10 @@ export const showToast: ShowToastFn = ({
   cancel,
   onDismiss,
 }: ShowToastOptions) => {
+  const dismissId = id ?? createToastId()
+
   return toast.custom(
-    (toastId) => (
+    () => (
       <ToastContent
         type={type}
         title={title}
@@ -60,14 +66,14 @@ export const showToast: ShowToastFn = ({
         closeButton={closeButton}
         icon={icon}
         className={className}
-        toastId={toastId}
+        toastId={dismissId}
         action={action}
         cancel={cancel}
         important={important}
       />
     ),
     {
-      id,
+      id: dismissId,
       position,
       duration: important ? Math.max(duration, 6000) : duration,
       dismissible,
