@@ -7,7 +7,7 @@ import { ArticleSectionView } from "./components/ArticleSectionView"
 import { useArticleFilter } from "./hooks/useArticleFilter"
 import { useArticlePosts } from "./hooks/useArticlePosts"
 
-const SEARCH_DEBOUNCE_MS = 3000
+const SEARCH_DEBOUNCE_MS = 1200
 
 export default function ArticleSection() {
   const [activeFilter, setActiveFilter] = useArticleFilter()
