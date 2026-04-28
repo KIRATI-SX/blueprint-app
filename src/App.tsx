@@ -23,7 +23,6 @@ import RequireUserAuth from "@/features/auth/guards/RequireUserAuth";
 import { Toaster } from "@/components/ui/sonner";
 
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import HealthTestPage from "./pages/HealthTestPage";
 const LandingPage = lazy(loadLandingPage);
 const LoginPage = lazy(loadLoginPage);
 const AdminLoginPage = lazy(loadAdminLoginPage);
@@ -64,7 +63,6 @@ function App() {
               element={<RegistrationSuccessPage />}
             />
             <Route path="/post/:postId" element={<ViewPostPage />} />
-            <Route path="/health" element={<HealthTestPage />} />
             {/* หน้าระบบผู้ใช้ */}
             <Route element={<RequireUserAuth />}>
               <Route path="/profile" element={<ProfilePage />} />
