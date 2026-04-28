@@ -1,11 +1,11 @@
-import axios from "axios"
+import { apiClient } from "@/lib/apiClient"
 
 import type { BlogPost } from "@/types/blogPost"
 
 import { mapApiPostToBlogPost } from "./mapApiPostToBlogPost"
 import type { PostsListResponse } from "./postsApiTypes"
 
-const POSTS_LIST_URL = "https://blog-post-project-api.vercel.app/posts"
+const POSTS_LIST_PATH = "/posts"
 
 export type FetchBlogPostsParams = {
   page?: number
@@ -31,7 +31,7 @@ export async function fetchBlogPosts(
   request: FetchBlogPostsParams = {}
 ): Promise<FetchBlogPostsResult> {
   const { page = 1, limit = 6, category, keyword } = request
-  const { data } = await axios.get<PostsListResponse>(POSTS_LIST_URL, {
+  const { data } = await apiClient.get<PostsListResponse>(POSTS_LIST_PATH, {
     params: {
       page,
       limit,
@@ -53,8 +53,8 @@ export async function fetchBlogPosts(
  * ดึงข้อมูลบทความแบบรายตัวจาก id
  */
 export async function fetchBlogPostById(postId: number | string): Promise<BlogPost> {
-  const { data } = await axios.get<PostsListResponse["posts"][number]>(
-    `${POSTS_LIST_URL}/${postId}`
+  const { data } = await apiClient.get<PostsListResponse["posts"][number]>(
+    `${POSTS_LIST_PATH}/${postId}`
   )
   return mapApiPostToBlogPost(data)
 }
